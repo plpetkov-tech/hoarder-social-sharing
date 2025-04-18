@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hoarder-social-sharing
+    #author: Plamen Petkov
+  name: hoarder-social-sharing
+  namespace: hoarder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hoarder-social-sharing
+  template:
+    metadata:
+      labels:
+        app: hoarder-social-sharing
+    spec:
+      containers:
+      - image: plpetkov/hoarder-social-sharing
+        name: hoarder-social-sharing
+        env:
+          - name: BLUESKY_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: BLUESKY_USERNAME
+                name: hoarder-social-sharing-secret
+          - name: BLUESKY_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: BLUESKY_PASSWORD
+                name: hoarder-social-sharing-secret
+          - name: LINKEDIN_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: LINKEDIN_ACCESS_TOKEN
+                name: hoarder-social-sharing-secret
+          - name: LINKEDIN_USER_URN
+            valueFrom:
+              secretKeyRef:
+                key: LINKEDIN_USER_URN
+                name: hoarder-social-sharing-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hoarder-social-sharing
+    #author: Plamen Petkov
+  name: hoarder-social-sharing
+  namespace: hoarder
+spec:
+  ports:
+  - name: 3000-3000
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: hoarder-social-sharing
+  type: ClusterIP

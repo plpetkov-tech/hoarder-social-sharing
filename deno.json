@@ -1,0 +1,14 @@
+{
+  "tasks": {
+    "start": "deno run --allow-net --allow-env main.ts",
+    "dev": "deno run --watch --allow-net --allow-env main.ts"
+  },
+  "imports": {
+    "oak": "https://deno.land/x/oak@v12.6.1/mod.ts"
+  },
+  "fmt": {
+    "indentWidth": 2,
+    "singleQuote": false,
+    "useTabs": false
+  }
+}
