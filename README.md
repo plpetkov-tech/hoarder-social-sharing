@@ -128,6 +128,9 @@ kubectl create secret generic hoarder-social-sharing-secret \
   --from-literal=LINKEDIN_USER_URN='your-linkedin-urn'
 ```
 
+> Don't try to apply my sealed_secret.yaml, it won't work :D  
+
+
 ### Deploy to Kubernetes
 
 ```bash
